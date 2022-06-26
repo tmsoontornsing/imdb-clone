@@ -9,17 +9,12 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import React, { useState, useEffect, createContext, useReducer, useContext } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-const API_KEY = "19dedc791dc255982eaf84be8a93012a"
+const API_KEY = "Your TMDB API Key"
 
 const prefix = "https://image.tmdb.org/t/p/w500/"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBeRQRtT32ZuHH9HSgGcCluQsle0syLuvE",
-    authDomain: "tmdb-ec1d6.firebaseapp.com",
-    projectId: "tmdb-ec1d6",
-    storageBucket: "tmdb-ec1d6.appspot.com",
-    messagingSenderId: "174621332414",
-    appId: "1:174621332414:web:a3893ce15729b0fd585fef"
+    //replace with your firebase config
   };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
@@ -199,7 +194,7 @@ const getMovies = () => {
         input ?
         `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${input}`
         :
-        `https://api.themoviedb.org/3/movie/popular?api_key=19dedc791dc255982eaf84be8a93012a&language=en-US&page=${page}`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
     )
     .then(res => res.json())
     .then(function (json) {
@@ -297,7 +292,7 @@ const MovieScreen = ({ route }) => {
     useEffect(() => console.log(id), [])
 
 const getCast = () => {
-    fetch(`http://api.themoviedb.org/3/movie/${id}/casts?api_key=19dedc791dc255982eaf84be8a93012a`)
+    fetch(`http://api.themoviedb.org/3/movie/${id}/casts?api_key=${API_KEY}`)
     .then((res) => res.json())
     .then((json) => setActors(json.cast))
 }
@@ -450,7 +445,7 @@ const ActorScreen = ({ route }) => {
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/person/${route.params.id}?api_key=19dedc791dc255982eaf84be8a93012a&append_to_response=combined_credits`)
+        fetch(`https://api.themoviedb.org/3/person/${route.params.id}?api_key=${API_KEY}&append_to_response=combined_credits`)
         .then((res) => res.json())
         .then((json) => {
             setActors(json)
